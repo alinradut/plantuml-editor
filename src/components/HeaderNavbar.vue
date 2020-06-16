@@ -54,6 +54,11 @@
       </ul>
       <ul class="nav navbar-nav">
         <li>
+          <a href="#" data-toggle="modal" data-target="#open"> <span class="glyphicon glyphicon-floppy-open"></span> open </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li>
           <a href="#" data-toggle="modal" data-target="#help"> <span class="glyphicon glyphicon-question-sign"></span> help </a>
         </li>
       </ul>

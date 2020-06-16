@@ -20,6 +20,7 @@
     </div>
     <helpModal></helpModal>
     <optionsModal></optionsModal>
+    <openModal></openModal>
     <gistModal></gistModal>
   </div>
 </template>
@@ -38,6 +39,7 @@ import directive from './directive'
 import HeaderNavbar from './components/HeaderNavbar'
 import HelpModal from './components/HelpModal'
 import OptionsModal from './components/OptionsModal'
+import OpenModal from './components/OpenModal'
 import GistModal from './components/GistModal'
 import HistoryList from './components/HistoryList'
 import CheatSheet from './components/CheatSheet'
@@ -53,6 +55,7 @@ export default {
     HeaderNavbar,
     HelpModal,
     OptionsModal,
+    OpenModal,
     GistModal,
     HistoryList,
     CheatSheet,

@@ -193,6 +193,9 @@ const mutations: any = {
       state.src = `${state.cdn}${state.umlExtension}/${state.encodedText}.${state.umlExtension}`
     }
   },
+  importUML(state: any, text: string) {
+    state.text = plantumlEncoder.decode(text)
+  },
   renderMarkdown(state: any, text: string) {
     const start: string = findKey(state.startuml, text)
     const end: string = findKey(state.enduml, text)
@@ -302,6 +305,17 @@ const actions: any = {
     context.commit('renderUML', text)
     context.commit('renderMarkdown', text)
     context.commit('setLocalStrage', text)
+  },
+  importUML(context: any, text: string) {
+    var decoded: string = plantumlEncoder.decode(text)
+    if (decoded.length && !decoded.startsWith('@start')) {
+      decoded = '@startuml\n' + decoded + '\n@enduml'
+    }
+
+    context.commit('setText', decoded)
+    context.commit('renderUML', decoded)
+    context.commit('renderMarkdown', decoded)
+    context.commit('setLocalStrage', decoded)
   },
   download({ state }: any) {
     const ext: any = _.find(state.umlExtensions, { text: state.umlExtension })
