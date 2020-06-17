@@ -92,7 +92,7 @@ export default {
     this.$store.dispatch('plantumlEditor/renderUML', this.$store.state.plantumlEditor.text)
     this.$store.dispatch('histories/defineScheme')
 
-    const store = this.$store
+    const store: any = this.$store
     window.onpopstate = function(event: any) {
       if (window.location.search.length) {
         store.dispatch('plantumlEditor/importUML', window.location.search.substr(1))
