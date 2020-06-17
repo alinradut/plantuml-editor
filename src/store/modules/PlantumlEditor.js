@@ -193,8 +193,14 @@ const mutations: any = {
       state.src = `${state.cdn}${state.umlExtension}/${state.encodedText}.${state.umlExtension}`
     }
   },
-  importUML(state: any, text: string) {
-    state.text = plantumlEncoder.decode(text)
+  importUML(state: any, puml: string) {
+    state.text = plantumlEncoder.decode(puml)
+  },
+  pushHistoryState(state: any, text: string) {
+    const newUrl: string = window.location.origin + window.location.pathname + '?' + state.encodedText
+    if (window.location.toString() != newUrl) {
+      window.history.pushState({ path: newUrl }, '', newUrl)
+    }
   },
   renderMarkdown(state: any, text: string) {
     const start: string = findKey(state.startuml, text)
@@ -209,12 +215,12 @@ const mutations: any = {
   },
   setLocalStrage(state: any, text: string) {
     if (window.localStorage) {
-      window.localStorage.setItem(state.plantuml, text)
+      // window.localStorage.setItem(state.plantuml, text)
     }
   },
   getLocalStrage(state: any) {
     const text: string = window.localStorage ? window.localStorage.getItem(state.plantuml) : ''
-    state.text = text || state.defaultText
+    // state.text = text || state.defaultText
   },
   setKeyMapLocalStrage(state: any, keyMap: string) {
     if (window.localStorage) {
@@ -305,6 +311,7 @@ const actions: any = {
     context.commit('renderUML', text)
     context.commit('renderMarkdown', text)
     context.commit('setLocalStrage', text)
+    context.commit('pushHistoryState', text)
   },
   importUML(context: any, text: string) {
     var decoded: string = plantumlEncoder.decode(text)
@@ -316,6 +323,7 @@ const actions: any = {
     context.commit('renderUML', decoded)
     context.commit('renderMarkdown', decoded)
     context.commit('setLocalStrage', decoded)
+    context.commit('pushHistoryState', text)
   },
   download({ state }: any) {
     const ext: any = _.find(state.umlExtensions, { text: state.umlExtension })

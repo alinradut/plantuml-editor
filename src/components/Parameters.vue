@@ -37,17 +37,33 @@
         </button>
         <popover-btn :title="'link'">
           <span slot="popover-btn" class="glyphicon glyphicon-link"></span>
-          <span slot="popover-title">PlantUML Server URL</span>
+          <span slot="popover-title">Link</span>
           <div slot="popover-content" class="row">
             <div class="col-sm-12">
+              <label for="imageLink">Direct link to image</label>
               <div class="input-group">
-                <input type="text" class="form-control" v-model="src" v-clipboard readonly style="width:auto;" />
+                <input type="text" class="form-control" id="imageLink" v-model="src" v-clipboard readonly style="width:auto;" />
                 <span class="input-group-btn">
                   <a :href="src" target="_blank" class="btn btn-default"><i class="fa fa-external-link"></i></a>
                 </span>
               </div>
+            </div>
+          </div>
+          <div slot="popover-content" class="row">
+            <div class="col-sm-12">
+              <label for="editorLink">Link to editor</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="editorLink" v-model="editorLink" v-clipboard readonly style="width:auto;" />
+                <span class="input-group-btn">
+                  <a :href="editorLink" target="_blank" class="btn btn-default"><i class="fa fa-external-link"></i></a>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div slot="popover-content" class="row">
+            <div class="col-sm-12">
               <span class="help-block">
-                if click, copy to clipbord .
+                Click to copy to clipboard.
               </span>
             </div>
           </div>
@@ -83,6 +99,9 @@ export default {
   computed: {
     src(): string {
       return this.$store.state.plantumlEditor.src
+    },
+    editorLink(): string {
+      return window.location
     },
     isSvg(): string {
       return this.$store.getters['plantumlEditor/isSvg']
