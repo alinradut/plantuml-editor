@@ -1,6 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = {
+  publicPath: './',
   configureWebpack: {
     resolve: {
       alias: {
